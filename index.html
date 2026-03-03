@@ -4,45 +4,57 @@
   <title>Random Quote Generator</title>
   <style>
     body {
-      text-align : center;
+      text-align: center;
       font-family: Arial, sans-serif;
-      margin-top: 80px;
+      margin-top: 100px;
+      background-color: #f5f5f5;
     }
     #quote {
       font-size: 24px;
       margin: 20px;
+      min-height: 60px;
     }
     #author {
-      font-size : 20px;
+      font-size: 20px;
       color: gray;
+      margin-bottom: 20px;
     }
     button {
       padding: 10px 20px;
       font-size: 18px;
       cursor: pointer;
+      border-radius: 8px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
     }
-    </style>
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
 </head>
 <body>
 
-  <h1>Random Quotes Generator</h1>
-  <p id= "quote">Click the button for a quote.</p>
-  <p id = "author"></p>
+  <h1>Random Quote Generator</h1>
+  <p id="quote">Click the button for a quote.</p>
+  <p id="author"></p>
   <button onclick="getQuote()">New Quote</button>
 
   <script>
-    async funcyion getQuote(){
-      try{
-        const response = await fetch("https://zenquotes.io/api/random");
-        const data = await response.json();
+    const quotes = [
+      { text: "The only way to do great work is to love what you do.", author: "Steve Jobs" },
+      { text: "Success is not final, failure is not fatal: It is the courage to continue that counts.", author: "Winston Churchill" },
+      { text: "Don’t watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
+      { text: "Believe you can and you're halfway there.", author: "Theodore Roosevelt" },
+      { text: "Push yourself, because no one else is going to do it for you.", author: "Unknown" },
+      { text: "It always seems impossible until it's done.", author: "Nelson Mandela" },
+      { text: "Start where you are. Use what you have. Do what you can.", author: "Arthur Ashe" }
+    ];
 
-        document.getElementById("quote").innerText = `"${data[0].q}"`;
-        document.getElementById("author").innerText = "- " + data[0].a;
-      } catch (error) {
-        document.getElementById("quote").innerText = "Opps! Couldn't fetch quote.";
-        document.getElementByID("author").innerText = "";
-        console,error(error);
-      }
+    function getQuote() {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      document.getElementById("quote").innerText = `"${quotes[randomIndex].text}"`;
+      document.getElementById("author").innerText = "- " + quotes[randomIndex].author;
     }
   </script>
 
