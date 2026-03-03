@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Quote Generator</title>
+  <style>
+    body {
+      text-align : center;
+      font-family: Arial, sans-serif;
+      margin-top: 80px;
+    }
+    #quote {
+      font-size: 24px;
+      margin: 20px;
+    }
+    #author {
+      font-size : 20px;
+      color: gray;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    </style>
+</head>
+<body>
+
+  <h1>Random Quotes Generator</h1>
+  <p id= "quote">Click the button for a quote.</p>
+  <p id = "author"></p>
+  <button onclick="getQuote()">New Quote</button>
+
+  <script>
+    async funcyion getQuote(){
+      try{
+        const response = await fetch("https://zenquotes.io/api/random");
+        const data = await response.json();
+
+        document.getElementById("quote").innerText = `"${data[0].q}"`;
+        document.getElementById("author").innerText = "- " + data[0].a;
+      } catch (error) {
+        document.getElementById("quote").innerText = "Opps! Couldn't fetch quote.";
+        document.getElementByID("author").innerText = "";
+        console,error(error);
+      }
+    }
+  </script>
+
+</body>
+</html>
